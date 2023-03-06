@@ -15,7 +15,7 @@
             <a href="{{ route('home.index') }}" target="_blank" class="nav-link">
                 <i class="nav-icon fas fa-globe"></i>
                 <p>
-                    {{ __('Halaman Utama') }}
+                    {{ __('Main Page') }}
                 </p>
             </a>
         </li>
@@ -23,23 +23,23 @@
 
         <li class="nav-header">{{ __('Main Menu') }}</li>
         <li class="nav-item">
-            <a href="{{ route('home.index') }}" target="_blank" class="nav-link">
+            <a href="{{ route('countries.index') }}" target="_blank" class="nav-link">
                 <i class="nav-icon fas fa-thumbtack"></i>
                 <p>
-                    {{ __('Halaman Utama') }}
+                    {{ __('Add courntries') }}
                 </p>
             </a>
         </li>
 
 
-        <li class="nav-header">{{ __('Sistem') }}</li>
+        <li class="nav-header">{{ __('System') }}</li>
         @can('lihat pengguna')
         <li class="nav-item">
             <a href="{{ route('backend.users.index') }}"
                 class="nav-link {{ (Request::is('backend/users')) ? 'active' : '' }} {{ (Request::is('backend/users/*')) ? 'active' : '' }}">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
-                    {{ __('Pengguna') }}
+                    {{ __('User') }}
                 </p>
             </a>
         </li>

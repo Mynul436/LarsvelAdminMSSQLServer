@@ -59,6 +59,16 @@
                         </div><!-- /.row -->
                     </div><!-- /.container-fluid -->
                 </div>
+
+
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            @yield('content')
+                        </div><!-- /.row -->
+                    </div><!-- /.container-fluid -->
+                </div>
+
                 <!-- /.content-header -->
 
                 <!-- Main content -->

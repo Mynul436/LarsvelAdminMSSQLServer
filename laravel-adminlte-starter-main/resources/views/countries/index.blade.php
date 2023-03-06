@@ -4,8 +4,14 @@
 @section('content')
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Country List</h5>
-            <a href="{{ route('countries.create') }}" class="btn btn-primary">Add Country</a>
+            {{-- <h5 class="mb-0">Country List</h5><br><br> --}}
+            <a href="{{ route('countries.create') }}" class="btn btn-primary"> Add Country</a>
+        </div>
+
+
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Country List</h5><br><br>
+            {{-- <a href="{{ route('countries.create') }}" class="btn btn-primary"> Add Country</a> --}}
         </div>
 
         <div class="card-body">
