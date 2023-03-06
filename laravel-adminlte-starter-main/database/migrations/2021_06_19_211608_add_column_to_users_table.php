@@ -19,7 +19,7 @@ class AddColumnToUsersTable extends Migration
             $table->string('birth_date')->nullable();
             $table->string('address')->nullable();
             $table->string('phone_number')->nullable();
-            $table->string('image')->nullable();
+            // $table->string('image')->nullable();
         });
     }
 

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Division;
+use App\Models\Country;
 use Illuminate\Http\Request;
 
-class DivisionController extends Controller
+class CountryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +15,9 @@ class DivisionController extends Controller
     public function index()
     {
         //
+
+        $countries = Country::all();
+    return view('countries.index', compact('countries'));
     }
 
     /**
@@ -25,6 +28,7 @@ class DivisionController extends Controller
     public function create()
     {
         //
+        return view('countries.create');
     }
 
     /**
@@ -36,15 +40,28 @@ class DivisionController extends Controller
     public function store(Request $request)
     {
         //
+
+        $validatedData = $request->validate([
+            'name' => 'required|unique:countries|max:255',
+            'code' => 'required|unique:countries|max:10',
+        ]);
+
+        $country = new Country;
+        $country->name = $request->name;
+        $country->code = $request->code;
+        $country->save();
+
+        return redirect()->route('countries.index')->with('success', 'Country created successfully!');
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Division  $division
+     * @param  \App\Models\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function show(Division $division)
+    public function show(Country $country)
     {
         //
     }
@@ -52,10 +69,10 @@ class DivisionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Division  $division
+     * @param  \App\Models\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function edit(Division $division)
+    public function edit(Country $country)
     {
         //
     }
@@ -64,10 +81,10 @@ class DivisionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Division  $division
+     * @param  \App\Models\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Division $division)
+    public function update(Request $request, Country $country)
     {
         //
     }
@@ -75,10 +92,10 @@ class DivisionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Division  $division
+     * @param  \App\Models\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Division $division)
+    public function destroy(Country $country)
     {
         //
     }

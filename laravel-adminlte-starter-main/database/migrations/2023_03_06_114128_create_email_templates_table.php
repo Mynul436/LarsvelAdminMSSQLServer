@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDistrictsTable extends Migration
+class CreateEmailTemplatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,12 @@ class CreateDistrictsTable extends Migration
      */
     public function up()
     {
-        Schema::create('districts', function (Blueprint $table) {
-            // $table->id();
-            // $table->string('name');
-        
-            // $table->timestamps();
-
+        Schema::create('email_templates', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('division_id');
+            $table->text('subject');
+            $table->text('message');
             $table->timestamps();
-
-            $table->foreign('division_id')->references('id')->on('divisions')->onDelete('cascade');
-
         });
     }
 
@@ -36,6 +29,6 @@ class CreateDistrictsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('districts');
+        Schema::dropIfExists('email_templates');
     }
 }

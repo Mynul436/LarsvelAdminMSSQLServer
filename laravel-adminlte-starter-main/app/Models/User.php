@@ -28,7 +28,15 @@ class User extends Authenticatable
         'phone_number',
         'image'
     ];
+    public function conversations()
+    {
+        return $this->hasMany(Conversation::class);
+    }
 
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
     /**
      * The attributes that should be hidden for arrays.
      *
