@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\DistrictController;
+use App\Http\Controllers\UserNewController; 
 
 
 //Country
@@ -53,6 +55,24 @@ Route::middleware(['auth'])->group(function () {
     ->name('districts.store');
 });
 
+
+// Define routes for UserController
+Route::group(['middleware' => 'auth'], function () {
+Route::get('users', [UserNewController::class, 'index'])->name('users.index');
+
+Route::get('users/create', [UserNewController::class, 'create'])->name('users.create');
+
+Route::post('/users', [UserNewController::class, 'store'])->name('users.store');
+
+Route::get('/users/{user}', [UserNewController::class, 'show'])->name('users.show');
+
+Route::get('users/{user}/edit', [UserNewController::class, 'edit'])->name('users.edit');    
+    
+Route::put('users/{user}', [UserNewController::class, 'update'])->name('users.update');
+
+Route::delete('users/{user}', [UserNewController::class, 'destroy'])->name('users.destroy');
+
+});
 
 
 

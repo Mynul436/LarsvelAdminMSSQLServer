@@ -55,6 +55,7 @@ class DivisionController extends Controller
         //
         $validatedData = $request->validate([
             'name' => 'required|unique:divisions|max:255',
+            'country_id' => 'required',
         ]);
 
         $division = new Division;

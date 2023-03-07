@@ -65,8 +65,27 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             @yield('content')
-                            @yield('div-content')
-                            @yield('dis-content')
+                            @yield('role-add-content')
+                            {{-- @yield('role-edit-content') --}}
+                            {{-- @yield('role-create-content') --}}
+                        </div><!-- /.row -->
+                    </div><!-- /.container-fluid -->
+                </div>
+
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            @yield('role-create-content')
+                      
+                        </div><!-- /.row -->
+                    </div><!-- /.container-fluid -->
+                </div>
+
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            @yield('user-show-content')
+                      
                         </div><!-- /.row -->
                     </div><!-- /.container-fluid -->
                 </div>

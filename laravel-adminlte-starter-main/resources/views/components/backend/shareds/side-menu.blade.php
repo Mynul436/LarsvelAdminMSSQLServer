@@ -29,6 +29,14 @@
                     {{ __('Service Point') }}
                 </p>
             </a>
+
+            <a href="{{ route('users.index') }}" target="_blank" class="nav-link">
+                <i class="nav-icon fas fa-thumbtack"></i>
+                <p>
+                    {{ __('Add ref User') }}
+                </p>
+            </a>
+
         </li>
 
 
