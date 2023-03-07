@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SettingSeeder::class);
         $this->call(PermissionSeeder::class);
 
-        $this->call(DivisionSeeder::class);
-        $this->call(DistrictSeeder::class);
+        // $this->call(DivisionSeeder::class);
+        // $this->call(DistrictSeeder::class);
     
 
     }

@@ -26,7 +26,7 @@
             <a href="{{ route('countries.index') }}" target="_blank" class="nav-link">
                 <i class="nav-icon fas fa-thumbtack"></i>
                 <p>
-                    {{ __('Add courntries') }}
+                    {{ __('Service Point') }}
                 </p>
             </a>
         </li>

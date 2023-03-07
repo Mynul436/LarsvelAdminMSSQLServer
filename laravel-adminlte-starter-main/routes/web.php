@@ -11,7 +11,10 @@ use App\Http\Controllers\Backend\SettingController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\DivisionController;
 
+
+//Country
 Route::middleware(['auth'])->group(function () {
     Route::get('/countries', [CountryController::class, 'index'])
     ->name('countries.index');
@@ -20,6 +23,40 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/countries', [CountryController::class, 'store'])
     ->name('countries.store');
 });
+
+// Route::middleware(['auth', 'admin'])->group(function () {
+//     Route::resource('countries', 'CountryController');
+// });
+
+
+
+//Devison
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/devisions', [DivisionController::class, 'index'])
+    ->name('devisions.index');
+    Route::get('/devisions/create', [DivisionController::class, 'create'])
+    ->name('devisions.create');
+    Route::post('/devisions', [DivisionController::class, 'store'])
+    ->name('devisions.store');
+});
+
+
+
+//District
+Route::middleware(['auth'])->group(function () {
+    Route::get('/districts', [DivisionController::class, 'index'])
+    ->name('districts.index');
+    Route::get('/districts/create', [DivisionController::class, 'create'])
+    ->name('districts.create');
+    Route::post('/districts', [DivisionController::class, 'store'])
+    ->name('districts.store');
+});
+
+
+
+
+
 
 
 Route::get('test', function () {

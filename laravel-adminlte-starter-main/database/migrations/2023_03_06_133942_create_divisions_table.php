@@ -16,6 +16,8 @@ class CreateDivisionsTable extends Migration
         Schema::create('divisions', function (Blueprint $table) {
             $table->id();            
             $table->string('name');
+        $table->foreignId('country_id')->constrained('countries')
+        ->onDelete('cascade') ;   
             $table->timestamps();
         });
     }

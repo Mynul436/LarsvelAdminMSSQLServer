@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
+use App\Models\District;
+use App\Models\Division;
 use Illuminate\Http\Request;
 
 class CountryController extends Controller
@@ -12,11 +14,27 @@ class CountryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+     {
+         $this->middleware('auth');
+         $this->middleware(function ($request, $next) {
+             if (auth()->user()->role !== 'admin') {
+                 abort(403, 'Unauthorized action.');
+             }
+             return $next($request);
+         });
+     }
+     
+
+
+
     public function index()
     {
         //
 
-        $countries = Country::all();
+    $countries = Country::all();
+  
     return view('countries.index', compact('countries'));
     }
 
@@ -43,12 +61,13 @@ class CountryController extends Controller
 
         $validatedData = $request->validate([
             'name' => 'required|unique:countries|max:255',
-            'code' => 'required|unique:countries|max:10',
+            // 'code' => 'required|unique:countries|max:10',
         ]);
 
         $country = new Country;
         $country->name = $request->name;
-        $country->code = $request->code;
+        $country->user_id = auth()->user()->id;
+        // $country->code = $request->code;
         $country->save();
 
         return redirect()->route('countries.index')->with('success', 'Country created successfully!');
@@ -61,9 +80,13 @@ class CountryController extends Controller
      * @param  \App\Models\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function show(Country $country)
+    public function show($id)
     {
         //
+        // $divisions = Division::where('country_id', $country->id)->get();
+        $country = Country::findOrFail($id);
+        return view('countries.show', compact('country'));
+        
     }
 
     /**
@@ -72,9 +95,11 @@ class CountryController extends Controller
      * @param  \App\Models\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function edit(Country $country)
+    public function edit($id)
     {
         //
+        $country = Country::findOrFail($id);
+        return view('countries.edit', compact('country'));
     }
 
     /**
@@ -84,9 +109,20 @@ class CountryController extends Controller
      * @param  \App\Models\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Country $country)
+    public function update(Request $request, $id)
     {
         //
+
+        $validatedData = $request->validate([
+            'name' => 'required|max:255|unique:countries,name,' . $id,
+            'code' => 'nullable|max:10|unique:countries,code,' . $id,
+        ]);
+
+        $country = Country::findOrFail($id);
+        $country->update($validatedData);
+
+        return redirect()->route('countries.show', $country->id)
+            ->with('success', 'Country updated successfully.');
     }
 
     /**
@@ -95,8 +131,15 @@ class CountryController extends Controller
      * @param  \App\Models\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Country $country)
+    public function destroy($id)
     {
         //
+        $country = Country::findOrFail($id);
+        $country->delete();
+
+        return redirect()->route('countries.index')
+            ->with('success', 'Country deleted successfully.');
+ 
+
     }
 }

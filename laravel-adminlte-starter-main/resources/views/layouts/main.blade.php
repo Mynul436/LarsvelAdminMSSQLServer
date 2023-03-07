@@ -65,6 +65,8 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             @yield('content')
+                            @yield('div-content')
+                            @yield('dis-content')
                         </div><!-- /.row -->
                     </div><!-- /.container-fluid -->
                 </div>
