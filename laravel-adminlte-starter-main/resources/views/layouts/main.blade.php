@@ -90,6 +90,34 @@
                     </div><!-- /.container-fluid -->
                 </div>
 
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            @yield('delete-user-content')
+                      
+                        </div><!-- /.row -->
+                    </div><!-- /.container-fluid -->
+                </div>
+
+
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            @yield('user-edit-content')
+                      
+                        </div><!-- /.row -->
+                    </div><!-- /.container-fluid -->
+                </div>
+
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            @yield('user-logs-content')
+                      
+                        </div><!-- /.row -->
+                    </div><!-- /.container-fluid -->
+                </div>
+
                 <!-- /.content-header -->
 
                 <!-- Main content -->

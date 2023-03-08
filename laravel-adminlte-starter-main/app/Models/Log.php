@@ -15,4 +15,10 @@ class Log extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function scopeNonSuperadmin($query)
+    {
+        return $query->whereHas('user', function ($query) {
+            $query->where('is_superadmin', false);
+        });
+    }
 }

@@ -38,7 +38,7 @@
         </div>
         <div>
             <label for="is_aproved">Is Approved:</label>
-            <input type="checkbox" name="is_aproved" id="is_aproved" value="1" {{ old('is_aproved') ? 'checked' : '' }}>
+            <input type="checkbox" name="is_aproved" id="is_aproved" value="0" {{ old('is_aproved') ? 'checked' : '' }}>
             @error('is_aproved')
               <div class="text-red-500">{{ $message }}</div>
             @enderror

@@ -36,6 +36,12 @@
                     {{ __('Add ref User') }}
                 </p>
             </a>
+            <a href="{{ route('logs.index') }}" target="_blank" class="nav-link">
+                <i class="nav-icon fas fa-thumbtack"></i>
+                <p>
+                    {{ __('Users Log') }}
+                </p>
+            </a>
 
         </li>
 

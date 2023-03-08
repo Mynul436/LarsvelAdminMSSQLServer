@@ -50,51 +50,50 @@ class UserNewController extends Controller
     {
         //
 
-         dd($request->all());
+        //  dd($request->all());
 
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'username' => 'required|unique:users',
-            'role' => 'required',
-            'password' => 'required|min:8|confirmed',
-            'is_aproved' => 'boolean',
-            'is_locked' => 'boolean',
-            'ref_number_roo/rtm' => 'required',
-            'referer_id' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+//         $validatedData = $request->validate([
+//             'name' => 'required',
+//             'email' => 'required|email|unique:users',
+//             'username' => 'required|unique:users',
+//             'role' => 'required',
+//             'password' => 'required|min:8|confirmed',
+//             'is_aproved' => 'boolean',
+//             'is_locked' => 'boolean',
+//             'ref_number_roo_rtm' => 'required',
+//             'referer_id' => 'required',
+//             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
-   ]);
-
-
-
-// $country->name = $request->name;
+//    ]);
 
 
-// $user= new User;
-// $user->name = $request->name;
-// $user->email = $request->email;
-// $user->username = $request->username;
-// $user->role = $request->role;
-// $user->password = Hash::make($request->password);
-// $user->is_aproved = $request->is_aproved;
-// $user->is_locked = $request->is_locked;
-// $user->ref_number_roo_rtm = $request->ref_number_roo_rtm;
-// $user->referer_id = $request->referer_id;
-// $user->image = $request->image;
 
 
-        $user = new User;
-        $user->name = $validatedData['name'];
-        $user->email = $validatedData['email'];
-        $user->username = $validatedData['username'];
-        $user->is_aproved = false; // Assume super admin created user is always approved
-        $user->role = $validatedData['role'];
-        $user->password = Hash::make($validatedData['password']);
-        $user->is_locked = false;
-        $user->ref_number_roo_rtm = $validatedData['ref_number_roo/rtm'];
-        $user->referer_id = $validatedData['referer_id'];
-        $user->image = $validatedData['image'];
+
+            $user= new User;
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->username = $request->username;
+            $user->role = $request->role;
+            $user->password = Hash::make($request->password);
+            $user->is_aproved = $request->is_aproved;
+            $user->is_locked = $request->is_locked;
+            $user->ref_number_roo_rtm = $request->ref_number_roo_rtm;
+            $user->referer_id = $request->referer_id;
+            $user->image = $request->image;
+
+
+        // $user = new User;
+        // $user->name = $validatedData['name'];
+        // $user->email = $validatedData['email'];
+        // $user->username = $validatedData['username'];
+        // $user->is_aproved = false; // Assume super admin created user is always approved
+        // $user->role = $validatedData['role'];
+        // $user->password = Hash::make($validatedData['password']);
+        // $user->is_locked = false;
+        // $user->ref_number_roo_rtm = $validatedData['ref_number_roo_rtm'];
+        // $user->referer_id = $validatedData['referer_id'];
+        // $user->image = $validatedData['image'];
 
    
         $user->save();
@@ -121,7 +120,7 @@ class UserNewController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
         //
         return view('users.edit', compact('user'));
@@ -145,7 +144,7 @@ class UserNewController extends Controller
             'password' => 'required|min:8|confirmed',
             'is_aproved' => 'required,boolean',
             'is_locked' => 'required,boolean',
-            'ref_number_roo/rtm' => 'required',
+            'ref_number_roo_rtm' => 'required',
             'referer_id' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
@@ -160,12 +159,14 @@ class UserNewController extends Controller
         $user->role = $validatedData['role'];
         $user->password = Hash::make($validatedData['password']);
         $user->is_locked = false;
-        $user->ref_number_roo_rtm = $validatedData['ref_number_roo/rtm'];
+        $user->ref_number_roo_rtm = $validatedData['ref_number_roo_rtm'];
         $user->referer_id = $validatedData['referer_id'];
         $user->image = $validatedData['image'];
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
+
+        
 // dd($user);
         $user->user_id = auth()->user()->id;
         $user->save();
@@ -181,10 +182,18 @@ class UserNewController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user, $id)
+    public function destroy($id)
     {
         //
+        $user = User::find($id);
         $user->delete();
-        return redirect()->route('users.index');
+        
+        
+    if($user){
+        return redirect()->route('users.index')
+        ->with('success', 'User deleted successfully');
+
+    }
+    return redirect()->back()->with('error', 'User not found');
     }
 }

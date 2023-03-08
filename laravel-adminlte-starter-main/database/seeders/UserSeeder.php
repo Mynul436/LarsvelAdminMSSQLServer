@@ -17,23 +17,27 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        
 
-        $avatar = new Avatar();
-        $image = time() . ".png";
-        $avatar->create('Budi Rahmat')
-        ->save(storage_path('app/public/profile_images/' . $image));
-        $saveImage = "profile_images/" . $image;
+        
+
+        // $avatar = new Avatar();
+        // $image = time() . ".png";
+        // $avatar->create('Budi Rahmat')
+        // ->save(storage_path('app/public/profile_images/' . $image));
+        // $saveImage = "profile_images/" . $image;
         $user = User::create([
             'name' => 'Admin system',
             'username' => 'superadmin',
             'is_approved' => true,
             'email' => 'superadmin@example.com',
             'password' => Hash::make('password'),
-            'image' => $saveImage,
+            // 'image' => $saveImage,
             'is_locked' => false,
-            'ref_number_roo/rtm' => '1234567890',
+            'ref_number_roo_rtm' => '1234567890',
             'referer_id' => 1,
-            'role' => 'admin'
+            'role' => 'admin',
+            'is_superadmin' => true,
         ]);
         $role = Role::findById(1);
         $user->assignRole($role->name);

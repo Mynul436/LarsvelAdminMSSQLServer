@@ -14,6 +14,18 @@ use App\Http\Controllers\CountryController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\UserNewController; 
+use App\Http\Controllers\LogController;
+
+
+//Logs
+Route::middleware(['auth'])->group(function () {
+    Route::get('/logs', [LogController::class, 'index'])
+    ->name('logs.index');
+    Route::get('/logs/create', [LogController::class, 'create'])
+    ->name('logs.create');
+    Route::post('/logs', [LogController::class, 'store'])
+    ->name('logs.store');
+});
 
 
 //Country

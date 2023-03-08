@@ -26,7 +26,8 @@ class User extends Authenticatable
         'birth_date',
         'address',
         'phone_number',
-        'image'
+        'image',
+      
     ];
     public function conversations()
     {
